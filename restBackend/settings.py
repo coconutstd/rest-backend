@@ -13,12 +13,15 @@ import os
 from django.core.exceptions import ImproperlyConfigured
 from pathlib import Path
 
+
 def get_env_variable(var_name):
-  try:
-    return os.environ[var_name]
-  except KeyError:
-    error_msg = "Set the {} environment variable".format(var_name)
-    raise ImproperlyConfigured(error_msg)
+
+    try:
+        return os.environ[var_name]
+    except KeyError:
+        error_msg = "Set the {} environment variable".format(var_name)
+        raise ImproperlyConfigured(error_msg)
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -86,8 +89,12 @@ WSGI_APPLICATION = 'restBackend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': get_env_variable("POSTGRE_DB_NAME"),
+        'USER': get_env_variable("POSTGRE_USER_NAME"),
+        'PASSWORD': get_env_variable("POSTGRE_PASSWORD"),
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
