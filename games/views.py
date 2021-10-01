@@ -17,10 +17,10 @@ class GameCategoryList(generics.ListCreateAPIView):
     name = 'gamecategory-list'
 
 
-class GameCategoryDetail(generics.RetrieveDestroyAPIView):
+class GameCategoryDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = GameCategory.objects.all()
     serializer_class = GameCategorySerializer
-    name = 'gamecategory-list'
+    name = 'gamecategory-detail'
 
 
 class GameList(generics.ListCreateAPIView):
@@ -44,7 +44,7 @@ class PlayerList(generics.ListCreateAPIView):
 class PlayerDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Player.objects.all()
     serializer_class = PlayerSerializer
-    name = 'player-list'
+    name = 'player-detail'
 
 
 class PlayerScoreList(generics.ListCreateAPIView):
@@ -61,11 +61,10 @@ class PlayerScoreDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class ApiRoot(generics.GenericAPIView):
     name = 'api-root'
-
     def get(self, request, *args, **kwargs):
         return Response({
             'players': reverse(PlayerList.name, request=request),
             'game-categories': reverse(GameCategoryList.name, request=request),
             'games': reverse(GameList.name, request=request),
             'scores': reverse(PlayerScoreList.name, request=request)
-        })
+            })
