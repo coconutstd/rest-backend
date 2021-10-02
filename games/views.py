@@ -61,6 +61,7 @@ class PlayerScoreDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class ApiRoot(generics.GenericAPIView):
     name = 'api-root'
+
     def get(self, request, *args, **kwargs):
         return Response({
             'players': reverse(PlayerList.name, request=request),

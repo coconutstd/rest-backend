@@ -16,11 +16,10 @@ class Game(models.Model):
     name = models.CharField(max_length=200, blank=True, default='')
     game_category = models.ForeignKey(
         GameCategory,
-        related_name='games',
+        related_name="games",
         on_delete=models.CASCADE
     )
     release_date = models.DateTimeField()
-    game_category = models.CharField(max_length=200, blank=True, default='')
     played = models.BooleanField(default=False)
 
     class Meta:

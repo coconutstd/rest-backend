@@ -1,6 +1,7 @@
 from django.conf.urls import url
 from games import views
 
+
 urlpatterns = [
     url(r'^game-categories/$',
         views.GameCategoryList.as_view(),
@@ -23,10 +24,10 @@ urlpatterns = [
     url(r'^player-scores/$',
         views.PlayerScoreList.as_view(),
         name=views.PlayerScoreList.name),
-    url(r'^player-scores/$',
+    url(r'^player-scores/(?P<pk>[0-9]+)/$',
         views.PlayerScoreDetail.as_view(),
         name=views.PlayerScoreDetail.name),
     url(r'^$',
         views.ApiRoot.as_view(),
-        name=views.ApiRoot.name)
+        name=views.ApiRoot.name),
 ]
