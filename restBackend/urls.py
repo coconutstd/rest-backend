@@ -22,4 +22,5 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^', include('games.urls')),
     path('admin/', admin.site.urls),
+    url(r'^api-auth/', include('rest_framework.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

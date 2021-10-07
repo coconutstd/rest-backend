@@ -34,7 +34,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = get_env_variable("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -157,3 +157,12 @@ DEFAULT_RENDERER_CLASSES = (
 DEFAULT_CONTENT_NEGOTIATION_CLASS = (
     'rest_framework.negotiation.DefaultContentNegotiation',
 )
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'games.pagination.LimitOffsetPaginationWithMaxLimit',
+    'PAGE_SIZE': 5,
+    'DEFAULT_AUTHENTICATION_CLASS': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    )
+}
