@@ -49,7 +49,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'games.apps.GamesConfig'
+    'games.apps.GamesConfig',
+    'crispy_forms',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -161,8 +163,22 @@ DEFAULT_CONTENT_NEGOTIATION_CLASS = (
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'games.pagination.LimitOffsetPaginationWithMaxLimit',
     'PAGE_SIZE': 5,
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+        'rest_framework.filters.SearchFilter',
+        'rest_framework.filters.OrderingFilter',
+    ),
     'DEFAULT_AUTHENTICATION_CLASS': (
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-    )
+    ),
+    'DEFAULT_THROTTLE_CLASSES': (
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle',
+    ),
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '5/hour',
+        'user': '20/hour',
+        'game-categories': '30/hour',
+    }
 }
