@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'games.apps.GamesConfig',
     'crispy_forms',
     'django_filters',
+    'django_nose',
 ]
 
 MIDDLEWARE = [
@@ -182,3 +183,12 @@ REST_FRAMEWORK = {
         'game-categories': '30/hour',
     }
 }
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+NOSE_ARGS = [
+    '--with-coverage',
+    '--cover-erase',
+    '--cover-inclusive',
+    '--cover-package=games',
+]

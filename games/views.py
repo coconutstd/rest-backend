@@ -129,9 +129,7 @@ class PlayerScoreFilter(FilterSet):
             'to_score_date',
             'min_score',
             'max_score',
-            #player__name will be accessed as player_name
             'player_name',
-            #game__name will be accessed as game_name
             'game_name',
             )
 
@@ -155,6 +153,7 @@ class PlayerScoreDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class ApiRoot(generics.GenericAPIView):
     name = 'api-root'
+
     def get(self, request, *args, **kwargs):
         return Response({
             'players': reverse(PlayerList.name, request=request),
