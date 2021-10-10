@@ -39,6 +39,20 @@ class GameCategoryTests(APITestCase):
             status.HTTP_400_BAD_REQUEST
         )
 
-
-
+    def test_retrieve_game_categories_list(self):
+        new_game_category_name = 'New Game Category'
+        self.create_game_category(new_game_category_name)
+        url = reverse('gamecategory-list')
+        response = self.client.get(url, format='json')
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_200_OK
+        )
+        self.assertEqual(
+            response.data['count'],
+        )
+        self.assertEqual(
+            response.data['results'][0]['name'],
+            new_game_category_name
+        )
 
